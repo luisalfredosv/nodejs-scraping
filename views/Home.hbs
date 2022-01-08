@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Resultado</h1>
+
+        <div id="msg">
+            {{msg}}
+        </div>
+        <div id="type">
+            {{type}}
+        </div>
+        <div id="amount">
+            {{amount}}
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+const getResponse = async function(){
+
+    let url =  "/api";
+
+    let response = await fetch(url, {
+    method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const { msg, type, amount } = await response.json();
+    
+    document.getElementById("msg").innerHTML = msg;
+    document.getElementById("type").innerHTML = type; 
+    document.getElementById("amount").innerHTML = amount; 
+
+}
+
+setInterval(()=> {
+    getResponse()
+}, 60000)
+</script>
